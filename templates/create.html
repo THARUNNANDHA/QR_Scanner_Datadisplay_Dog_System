@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/create.css')}}">
+</head>
+<body>
+    <div class="outer">
+        {%if error%}
+            <div class="error">
+                <h3>{{error}}</h3>
+            </div>
+        {%endif %}
+        {%if success%}
+            <div class="success">
+                <a href="{{ url_for('download_file', filename=unique_id+'.png') }}" download>{{success}}</a>
+            </div>
+        {%endif %}
+        <h1>Create QR</h1>
+        <div class="details">
+            <form action="" method="POST">
+                <label for="Name">Name</label>
+                <input type="text" name="Name" id="Name" required>
+                <label for="About">About</label>
+                <input type="text" name="About" id="About" required>
+                <label for="Vaccination" style="margin-left:46px">Vaccination</label>
+                <!-- <input type="text" name="Vaccination" id="Vaccination"  required> -->
+                <textarea id="Vaccination" style="font-size: 15px; margin-top:5px; width:90%" name="Vaccination" rows="5"  placeholder="enter vaccinations details in text area"></textarea>
+                <button type="submit" class="button">Genarate QR</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

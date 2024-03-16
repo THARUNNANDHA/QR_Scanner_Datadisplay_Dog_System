@@ -1,0 +1,127 @@
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    height: 50px;
+    line-height: 50px; /* Center text vertically */
+    text-align: center;
+    color: white;
+    background-color: rgba(255, 221, 0, 0.8); /* Adjust opacity for better readability */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("../images/dog.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    margin: 0; /* Remove default margin to avoid unexpected spacing */
+}
+
+.outer {
+    margin-top: 30px;
+    width: 90%; 
+    max-width: 700px; 
+    height: 400px; 
+    border-radius: 5%;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 10px rgb(0, 0, 0);
+    padding: 20px;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 20px; 
+    padding: 10px 20px; 
+    background-color: blue;
+    color: white;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10%;
+    box-shadow: 5px 5px 5px rgb(0, 17, 255);
+    transition: background-color 0.3s, color 0.3s; 
+}
+
+a:hover {
+    background-color: white;
+    color: blue;
+    border: 2px solid rgb(0, 17, 255);
+}
+.details{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner_details{
+    width: 25%;
+    height: auto;
+    border: 2px solid rgb(255, 255, 255);
+    margin: 5px;
+    padding: 4px;
+}
+
+h3{
+    color: white;
+}
+p{
+    color: white;
+}
+
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .outer {
+        width: 90%;
+        height: 85%;
+    }
+    h1{
+        height: 100px;
+    }
+    .inner_details{
+        width: 100%;
+    }
+    .details{
+        flex-direction:column ;
+    }
+    body{
+        height: 120vh;
+    }
+
+}
+
+/* Media Query for even smaller screens */
+@media screen and (max-width: 576px) {
+    .outer {
+        width: 100%;
+        height:100%; /* Adjust padding for smaller screens */
+    }
+    a {
+        margin: 5px;
+        margin-bottom: 20px; /* Adjust margin for smaller screens */
+    }
+    h1{
+        height: 100px;
+    }
+    .inner_details{
+        width: 100%;
+    }
+    .details{
+        flex-direction: column;
+    }
+    
+    .outer{
+        margin-bottom: 90px;
+    }
+    body{
+        height: 105vh;
+    }
+}

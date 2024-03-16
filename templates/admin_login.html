@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/admin_login.css')}}">
+</head>
+<body>
+    <div class="heading">
+        <h1>Admin Login</h1>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>About</th>
+                <th>Vaccination</th>
+                <th>Unique_id</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for data in datas %}
+            <tr>
+                <td>{{data.id}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.about}}</td>
+                <td>{{data.vaccination}}</td>
+                <td>{{data.unique_id}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>

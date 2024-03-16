@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/delete.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="outer">
+        {%if error%}
+            <div class="error">
+                <h2>{{error}}</h2>
+            </div>
+        {%endif%}
+        {%if success%}
+            <div class="success">
+                <h2>{{success}}</h2>
+            </div>
+        {%endif%}
+        <h1>Delete Database</h1>
+        <form action="" method="POST">
+            <label for="Unique_id">Unique_id</label>
+            <input type="text" name="Unique_id" id="Unique_id">
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

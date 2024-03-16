@@ -1,0 +1,29 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)),url("../images/delete1.jpg");
+    background-position: center;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    height: 100vh;
+}
+.heading{
+
+    margin-bottom:20px;
+    color: rgb(255, 242, 0);
+}
+
+table{
+    color: white;
+    background-color:rgba(0, 0, 0, 0.3);
+}
+th{
+    color: blue;
+}
+
+/* @media screen and(max-width:576){
+    body{
+        
+    }
+} */

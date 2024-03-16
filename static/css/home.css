@@ -1,0 +1,85 @@
+.heading {
+    background-color: lightgray; /* Add background color or styles as needed */
+    padding: 20px; /* Add padding as needed */
+    color: black;
+}
+
+.main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    flex-direction: row; /* Allow content to grow to fill remaining space */
+}
+
+
+.dispaly_details, .outer {
+    border: 2px solid black;
+    height: 100vh;
+    width: 50%;
+}
+
+.outer {
+    background-color: blue;
+    padding-top: 20px;
+    color: azure;
+}
+
+.dispaly_details{
+    background-color: rgb(254, 177, 177);
+    
+
+}
+
+@media only screen and (max-width: 600px) {
+    .content {
+        flex-direction: column;
+    }
+    .dispaly_details, .outer{
+        width: 100%;
+        margin-right: 10px;
+    }
+}
+
+.grid_container{
+    display: grid;
+    gap: 3px;
+    grid-template-columns: auto auto;
+
+}
+.item1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+.grid_container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    
+}
+
+.item1{
+    font-size: larger;
+}
+
+.item2{
+    font-size: 20px;
+    padding-top: 15px;
+    
+}
+
+
+.item3{
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.button{
+    margin-top: 50px;
+    margin-left: 40%;
+    padding: 10px;
+    
+}

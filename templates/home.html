@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+    <script>
+        function displayText() {
+            var outerDiv = document.querySelector('.display_area');
+            outerDiv.textContent = "{{about}}";
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="heading">
+            <h1>Welcome to Tharun QR Website</h1>
+        </div>
+        <div class="content">
+            
+            <div class="dispaly_details">
+                <div class="grid_container">
+                    <div class="item1">
+                        <h1>Dog details</h1>
+                    </div>
+                    <div class="item2">Name</div>
+                    <div class="item3">{{name}}</div>
+                    <div class="item2">Unique_id</div>
+                    <div class="item3">{{unique_id}}</div>
+                    <div class="item2">Vaccination</div>
+                    <div class="item3">{{vaccination}}</div>
+                </div>
+                <button class="button" onclick="displayText()">About Dog</button>
+            </div>
+            <div class="outer">
+                <div class="heading">
+                    <h1>About Dog</h1>
+                </div>
+                <div class="display_area">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
