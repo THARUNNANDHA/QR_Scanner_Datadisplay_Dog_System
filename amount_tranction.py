@@ -29,4 +29,4 @@ def generate_qr_code(amount):
     img.save(os.path.join(folder_path, "qr_code.png"))
 
 # Generate QR code with a specified amount
-generate_qr_code(10000000000000)
+generate_qr_code(100)
