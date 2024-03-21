@@ -3,9 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 import random
 import os
 import qrcode
+from flask_mail import Mail,Message
 
 
 app=Flask(__name__)
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']=465
+app.config['MAIL_USERNAME']='ntharun832jacky@gmail.com'
+app.config['MAIL_PASSWORD']='dogo ruiu ogty lrtp'
+app.config['MAIL_USE_TLS']=False
+app.config['MAIL_USE_SSL']=True
+
+mail=Mail(app)
+
+
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
@@ -18,6 +31,18 @@ class dogs_data(db.Model):
     vaccination = db.Column(db.String(300),nullable=False)
     unique_id = db.Column(db.Integer) 
 
+
+class bluecross_details(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    place = db.Column(db.String(30))
+    email = db.Column(db.String(100), nullable=False)
+
+class report_details(db.Model):
+    id=db.Column(db.Integer,primary_key=True)
+    place= db.Column(db.String(30))
+    email = db.Column(db.String(100), nullable=False)
+    reason = db.Column(db.String(300),nullable=False)
+    unique_id = db.Column(db.Integer) 
 
 @app.route("/", methods=['GET','POST'])
 def home():
@@ -109,7 +134,7 @@ def qr_redirect():
 
 def generate_qr_code(unique_identifier):
     # Construct URL with unique identifier
-    url = f"http://192.168.1.5:5000/qr_redirect?id={unique_identifier}"
+    url = f"http://192.168.1.4:5000/qr_redirect?id={unique_identifier}"
     
     # Generate QR code for the URL
     qr = qrcode.QRCode(
@@ -126,7 +151,7 @@ def generate_qr_code(unique_identifier):
 
     # Define the folder path
     folder_path = "created_picks"
-
+    
     # Create the folder if it doesn't exist
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -146,6 +171,49 @@ def delete_all():
 def admin_login():
     datas=dogs_data.query.all()
     return render_template("admin_login.html",datas=datas)
+    
+@app.route("/report", methods=["GET", "POST"])
+def report():
+    unique_id=request.args.get("unique_id")
+    places=bluecross_details.query.all()
+    if request.method == "POST":
+        place=request.form["place"]
+        unique_id=request.form["Unique_id"]
+        reason=request.form["reason"]
+        email_blue=bluecross_details.query.filter_by(place=place).first()
+        email=email_blue.email
+        data=report_details(place=place, reason=reason, email=email,unique_id=unique_id)
+        db.session.add(data)
+        db.session.commit()
+        send_mail(email,reason,unique_id)
+        return render_template("report.html",success="email send successfully",places=places,unique_id=unique_id)
+    
+    return render_template("report.html",places=places,unique_id=unique_id)
+
+
+def send_mail(email, reason, unique_id):
+    if email:
+        subject = f"Dog Details - {unique_id}"
+        body = f"""
+        <html>
+          <body style="font-family: Arial, sans-serif;">
+            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; border-radius: 5px; margin-bottom: 15px;">
+              <strong>Alert!</strong> Please pay attention to the following dog details:
+            </div>
+            <div style="border: 1px solid #ced4da; border-radius: 5px; padding: 15px; background-color: #fff;">
+              <h1 style="color: #007bff;">Dog Details</h1>
+              <p style="font-size: 18px;">Reason for inquiry: <strong>{reason}</strong></p>
+              <p style="font-size: 18px;">Unique ID: <strong>{unique_id}</strong></p>
+              <p style="font-size: 16px; color: #6c757d;">Thank you for your interest in our dogs!</p>
+            </div>
+          </body>
+        </html>
+        """
+        sender = "ntharun832jacky@gmail.com"
+        msg = Message(subject, sender=sender, recipients=[email])
+        msg.html = body
+        mail.send(msg)
+
 
 
 if __name__=='__main__':
@@ -156,21 +224,3 @@ if __name__=='__main__':
 
 
 
-
-    # if request.method == 'POST':
-    #     name=request.form['Name']
-    #     about=request.form['About']
-    #     vaccination=request.form['Vaccination']
-    #     unique_id=request.form['Unique_id']
-
-    #     if unique_id:
-    #         print("\n",name,'\n',about,'\n',vaccination,'\n',unique_id)
-            
-    #         db.session.add(new_data)
-    #         db.session.commit()
-        
-    #     else:
-    #         unique_id=generate_unique_code()
-    #         new_data = dogs_data(name=name,about=about,vaccination=vaccination,unique_id=unique_id)
-    #         db.session.add(new_data)
-    #         db.session.commit()

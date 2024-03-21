@@ -15,7 +15,8 @@
         {%endif %}
         {%if success%}
             <div class="success">
-                <a href="{{ url_for('download_file', filename=unique_id+'.png') }}" download>{{success}}</a>
+                <button onclick="pop()" id="pop" >Display QR</button>
+                <!-- <a href="{{ url_for('download_file', filename=unique_id+'.png') }}" download>{{success}}</a> -->
             </div>
         {%endif %}
         <h1>Create QR</h1>
@@ -29,8 +30,34 @@
                 <!-- <input type="text" name="Vaccination" id="Vaccination"  required> -->
                 <textarea id="Vaccination" style="font-size: 15px; margin-top:5px; width:90%" name="Vaccination" rows="5"  placeholder="enter vaccinations details in text area"></textarea>
                 <button type="submit" class="button">Genarate QR</button>
+                
             </form>
+            
+            
         </div>
     </div>
+    {%if success%}
+        <div  id="popup">
+            <img src="{{ url_for('download_file', filename=unique_id+'.png') }}" alt="">
+            <a class="link" href="{{ url_for('download_file', filename=unique_id+'.png') }}">click hear to downlode qr</a>
+            <span class="close" onclick="closepopup()">x</span>
+        </div>
+    {%endif %}
+    <script>
+        let gt=document.querySelector('body');
+        
+        function pop(){
+            var popup=document.getElementById('popup')
+            gt.style.backdropFilter='blur(5px)'
+            
+            popup.style.display = 'block';
+        }
+        function closepopup(){
+            gt.style.backdropFilter='none'
+            
+            var popup=document.getElementById('popup')
+            popup.style.display = 'none';
+        }
+    </script>
 </body>
 </html>

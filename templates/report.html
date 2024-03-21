@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/report.css')}}">
+    <title>Report</title>
+</head>
+<body>
+    <div class="outer">
+        {%if error%}
+            <div class="error">
+                <h3>{{error}}</h3>
+            </div>
+        {%endif%}
+        {%if success%}
+            <div class="success">
+                <h3>{{success}}</h3>
+            </div>
+        {%endif%}
+
+        <h1>Report Bluecross</h1>
+        <form action="" method="POST">
+            <label class="head1" for="Select region">Select Region</label>
+            <select name="place" id=""> 
+                {%for place in places%}
+                    <option value="{{place.place}}">{{place.place}}</option>
+                {%endfor%}
+            </select>
+            <label for="Unique_id" style="margin-left:35px;">Unique_id</label>
+            <input type="tel" name="Unique_id" id="Unique_id"  value="{{unique_id}}">
+            <label for="Reason of the report">Reason</label>
+            <textarea id="reason" style="font-size: 15px; margin-top:5px; width:90%" name="reason" rows="5"  placeholder="enter vaccinations details in text area"></textarea>
+            <button type="submit">Send Email</button>
+        </form>
+    </div>
+</body>
+</html>
